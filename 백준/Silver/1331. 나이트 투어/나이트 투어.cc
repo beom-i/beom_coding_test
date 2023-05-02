@@ -21,9 +21,7 @@ int main() {
         cin >> in;
         a = in[0]-64;
         b = in[1]-48;
-        if( !(a >=1 && b >= 1 && a<=6 && b<=6)){
-            valid = false;
-        }
+
         if(arr[a-1][b-1] ==1){//방문했었는지 먼저 판단
             valid=false;
         }

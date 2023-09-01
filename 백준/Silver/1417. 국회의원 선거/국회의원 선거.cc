@@ -1,44 +1,49 @@
 #include <iostream>
 #include <cstring>
+#include <string>
 #include <stdio.h>
 #include <string.h>
 #include <algorithm>
 #include <cmath>
 #include <list>
-
+#include <queue>
+#include <stack>
+#include <vector>
+#include <sstream>
 using namespace std;
+
 
 int main(){
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    int N,dasom;
-    cin>>N;
-    cin>>dasom;
-    int arr[50]={};
+
+    vector<int> vec;
+    int N,dasom,pre_money;
     int money=0;
-    for(int i = 0 ; i<N-1;i++){//dasom이 제외하고 나머지 사람들 투표 저장함.
-        cin>>arr[i];
+    cin >> N;
+    cin >> dasom;
+    for(int i = 0 ; i < N-1;i++){
+        int human;
+        cin>>human;
+        // dasom이 더 작을때, human 추가 / 더 크다면 볼 필요 없음
+        if(dasom <= human) vec.push_back(human); 
     }
-    if(N!=1){
-        while(true){
-            int max=0,max_idx=0;
-            for(int i = 0 ; i <N-1;i++){//다솜이 제외하고 최대표 알아보기
-                if(max<arr[i]){
-                    max = arr[i];
-                    max_idx=i;
+    while(true){
+        pre_money = money;
+        for(int i=0;i < vec.size() ;i++){
+            if(dasom <= vec[i] && vec[i] >= *max_element( vec.begin(), vec.end()) ){
+                dasom ++;
+                vec[i]--;
+                money ++;
+                // 추가해두고 다솜이 더 커졌다 그럼 삭제해
+                if(dasom>vec[i]){
+                    vec.erase(vec.begin()+i);
                 }
             }
-            if(max < dasom){//다솜이보다 콘 녀석이 없으면 끝냄
-                cout << money;
-                break;
-            }
-            //다솜이보다 큰 녀석이 있으면 -> 그녀석 줄이고 다솜이 늘리고 쓴 돈 증가시킴
-            arr[max_idx]--;
-            dasom++;
-            money++;
         }
+        if(pre_money == money) break;
     }
-    else cout<<money;
+    cout << money;
     return 0;
 }

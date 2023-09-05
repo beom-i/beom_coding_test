@@ -1,4 +1,4 @@
-# [Silver V] 나이트 투어 - 1331 
+# [Silver IV] 나이트 투어 - 1331 
 
 [문제 링크](https://www.acmicpc.net/problem/1331) 
 

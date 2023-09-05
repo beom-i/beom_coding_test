@@ -1,47 +1,64 @@
 #include <iostream>
 #include <cstring>
+#include <string>
 #include <stdio.h>
 #include <string.h>
 #include <algorithm>
 #include <cmath>
-
-
+#include <list>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <sstream>
+#include <iomanip> // std::fixed 및 std::setprecision을 사용하기 위해 필요
+#include <set>
+#include <map>
 
 using namespace std;
 
-int main() {
+int main(){
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    string in;
-    bool valid = true;
-    int arr[6][6]={0};
-    int a,b,starta,startb,pre_a=0,pre_b=0,sum=0;
-    for(int i = 0 ; i < 36 ; i ++){
-        cin >> in;
-        a = in[0]-64;
-        b = in[1]-48;
-
-        if(arr[a-1][b-1] ==1){//방문했었는지 먼저 판단
-            valid=false;
-        }
-        arr[a-1][b-1] = 1;
-        if(i == 0){//처음 좌표 적어두기
-            starta = a;
-            startb = b;
-        }
-        if(i==35){ //마지막 -> 처음 갈 수 있는지 판단
-            if( !(abs(a-starta) == 2 && abs(b-startb) == 1) ) //차이가 1과 2 차이가 안나고 , 2와 1차이가 안나면 false
-                if( !(abs(a-starta) == 1 && abs(b-startb) == 2)){
-                    valid=false;
-                }
-        }
-        if( !(pre_a == 0 && pre_b == 0) && !( (abs(a - pre_a)==1 && abs(b-pre_b) == 2) ||  (abs(a-pre_a) == 2 && abs(b-pre_b)== 1) ) ){
-            valid = false;
-        }
-        pre_a = a;
-        pre_b = b;
+    int arr[6][6];
+    for(int i = 0 ; i < 6;i++){
+        for(int l = 0 ; l < 6 ; l ++){
+            arr[i][l] = 1;
+        }    
     }
-    if(valid == false) cout << "Invalid";
-    else if(valid == true) cout << "Valid";
+    bool prove=true;
+    int x,y;
+    int start_x,start_y,end_x,end_y;
+    for(int i = 0;i<36;i++){
+        string s;
+        getline(cin,s);
+        // 처음값 저장
+        if(i==0){
+            start_x = s[0];
+            start_y = s[1];
+        }
+        // 나중값 저장
+        if(i==35){
+            end_x = s[0];
+            end_y = s[1];
+        }
+        if(i!=0){
+            int dx = abs(x-(s[0]-65));
+            int dy = abs(y-(s[1]-49));
+            if(!((dx == 1 && dy==2) || (dx ==2 && dy==1))) prove=false;
+        }
+        x = s[0]-65;
+        y = s[1]-49;
+        if(arr[x][y]==1) arr[x][y]=0;
+        else if(arr[x][y] == 0){
+            prove=false;
+        }
+    }
+    // 마지막에 돌아갈 수 있는지 판단
+    int lastx = abs(start_x-end_x);
+    int lasty = abs(start_y-end_y);
+    if( !(lastx==1&&lasty==2 || lastx==2 && lasty==1)   ) prove=false;
+    if(prove) cout<<"Valid";
+    else cout<<"Invalid";
+    return 0;
 }

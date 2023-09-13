@@ -32,3 +32,17 @@
 
  <p>첫째 줄에 문제의 정답을 출력한다.</p>
 
+
+### 배운 것
+
+            if(deq.front() == target){
+                deq.pop_front();
+                break;
+            }
+            if(target_index <= mididx){
+                deq.push_back(deq.front());
+                deq.pop_front();
+                count++;
+            }
+	    
+=>target_index는 무조건 위에 걸린다고 생각했는데 앞부분이 아니라 안쪽에 있을 때도 같은 경우 왼쪽으로 끌어야하기 때문에 분명히 같은 녀석을 갖고올 필요가 있었다.

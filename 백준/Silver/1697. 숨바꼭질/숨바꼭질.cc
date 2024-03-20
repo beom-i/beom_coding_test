@@ -22,7 +22,7 @@ int main() {
     cin.tie(0);
     cout.tie(0);
 
-    int subin[100002];
+    int subin[100001];
     fill(subin,subin+100001,-1);
     queue<int> Q;
     int N,K;

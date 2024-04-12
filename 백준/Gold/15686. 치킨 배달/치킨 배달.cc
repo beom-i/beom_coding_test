@@ -40,11 +40,8 @@ void combinations(int start, int n, int r) {
     }
 
     for (int i = start; i <= n; ++i) {
-        if(visited[i]) continue;
-        visited[i]=true;
         combination.push_back(i);
-        combinations(i, n, r - 1);  // 조합의 경우 i -> i+1
-        visited[i]=false;
+        combinations(i+1, n, r - 1);  // 조합의 경우 i -> i+1
         combination.pop_back();
     }
 }
